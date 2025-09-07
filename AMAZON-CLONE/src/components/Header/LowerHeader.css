@@ -1,0 +1,81 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Wrapper */
+.lower-header {
+  background-color: #232f3e; /* Amazon dark nav color */
+  color: white;
+  padding: 8px 20px;
+}
+
+/* Horizontal list */
+.lower-header ul {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  overflow-x: auto; /* allow horizontal scroll on mobile */
+}
+
+/* Scrollbar hidden for aesthetics */
+.lower-header ul::-webkit-scrollbar {
+  display: none;
+}
+.lower-header ul {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* List items */
+.lower-header li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px 4px;
+  white-space: nowrap;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.lower-header li:hover {
+  background-color: #37475a; /* subtle hover effect */
+  border-radius: 4px;
+}
+
+/* Menu icon (All) */
+.lower-header li svg {
+  font-size: 20px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .lower-header ul {
+    gap: 12px;
+  }
+  .lower-header li {
+    font-size: 13px;
+    padding: 5px 3px;
+  }
+  .lower-header li svg {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lower-header ul {
+    gap: 10px;
+  }
+  .lower-header li {
+    font-size: 12px;
+    padding: 4px 2px;
+  }
+  .lower-header li svg {
+    font-size: 16px;
+  }
+}

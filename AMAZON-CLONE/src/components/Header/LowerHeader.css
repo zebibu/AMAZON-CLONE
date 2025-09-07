@@ -1,4 +1,3 @@
-/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,9 +5,8 @@
   font-family: Arial, sans-serif;
 }
 
-/* Wrapper */
 .lower-header {
-  background-color: #232f3e; /* Amazon dark nav color */
+  background-color: #232f3e;
   color: white;
   padding: 8px 20px;
 }
@@ -19,10 +17,9 @@
   align-items: center;
   gap: 20px;
   list-style: none;
-  overflow-x: auto; /* allow horizontal scroll on mobile */
+  overflow-x: auto;
 }
 
-/* Scrollbar hidden for aesthetics */
 .lower-header ul::-webkit-scrollbar {
   display: none;
 }
@@ -31,7 +28,6 @@
   scrollbar-width: none;
 }
 
-/* List items */
 .lower-header li {
   display: flex;
   align-items: center;
@@ -44,36 +40,44 @@
 }
 
 .lower-header li:hover {
-  background-color: #37475a; /* subtle hover effect */
+  background-color: #37475a;
   border-radius: 4px;
 }
 
-/* Menu icon (All) */
 .lower-header li svg {
   font-size: 20px;
 }
 
-/* Mobile responsiveness */
+/* Mobile: Collapse into "All" */
 @media (max-width: 768px) {
   .lower-header ul {
-    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
   }
-  .lower-header li {
-    font-size: 13px;
-    padding: 5px 3px;
+
+  .lower-header li:not(:first-child) {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
   }
+
+  /* Show items when parent has "open" class */
+  .lower-header ul.open li:not(:first-child) {
+    max-height: 100px; /* enough to show item */
+    opacity: 1;
+    margin-left: 24px;
+  }
+
   .lower-header li svg {
     font-size: 18px;
   }
 }
 
 @media (max-width: 480px) {
-  .lower-header ul {
-    gap: 10px;
-  }
-  .lower-header li {
-    font-size: 12px;
-    padding: 4px 2px;
+  .lower-header li:not(:first-child) {
+    max-height: 80px;
   }
   .lower-header li svg {
     font-size: 16px;

@@ -63,9 +63,8 @@
     transition: all 0.3s ease;
   }
 
-  /* Show items when parent has "open" class */
   .lower-header ul.open li:not(:first-child) {
-    max-height: 100px; /* enough to show item */
+    max-height: 100px; 
     opacity: 1;
     margin-left: 24px;
   }

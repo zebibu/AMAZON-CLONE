@@ -1,0 +1,130 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px; 
+  padding: 60px 20px; 
+  max-width: 1500px;
+  margin: -120px auto 0 auto; 
+  position: relative;
+  z-index: 10;
+  min-height: 320px; 
+}
+
+.category-card {
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  text-decoration: none;
+  height: 260px; 
+  padding-bottom: 25px; 
+}
+
+/* Remove underline from links */
+.category-card a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+}
+
+/* Category Image */
+.category-card img {
+  width: 100%;
+  height: 196px; 
+  object-fit: cover; 
+  display: block;
+  transition: transform 0.3s;
+}
+
+.category-card:hover img {
+  transform: scale(1.05); 
+}
+
+/* Category Title */
+.category-card h2 {
+  font-size: 16px;
+  color: #111;
+  margin: 10px 10px 5px 10px;
+}
+
+/* Shop Now Link */
+.category-card p {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  margin: 0;
+  padding: 0;
+  color: #0071e3; 
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none; 
+  transition: color 0.2s;
+}
+
+.category-card p:hover {
+  color: #004b9b; 
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .category-card img {
+    height: 160px;
+  }
+  .category-card {
+    height: 240px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .category-card img {
+    height: 140px;
+  }
+  .category-card h2 {
+    font-size: 14px;
+  }
+  .category-card p {
+    font-size: 13px;
+    bottom: 8px;
+    left: 8px;
+  }
+  .category-card {
+    height: 220px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .category-card img {
+    height: 120px;
+  }
+  .category-card h2 {
+    font-size: 13px;
+  }
+  .category-card p {
+    font-size: 12px;
+    bottom: 6px;
+    left: 6px;
+  }
+  .category-card {
+    height: 200px;
+  }
+}

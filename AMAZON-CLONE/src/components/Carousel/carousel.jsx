@@ -4,21 +4,25 @@ import { img } from "./img/data";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./carousel.css";
 
-function carousel() {
+function CarouselComponent() {
   return (
-    <div>
+    <div className="banner-with-categories">
       <Carousel
-        autoPlay={true}
-        infiniteLoop={true}
-        showIndicators={true}
-        showThumbs={true}
+        autoPlay
+        infiniteLoop
+        showIndicators={false}
+        showThumbs={false}
+        showStatus={false}
+        interval={3000}
       >
         {img.map((imageItemLink, index) => (
-          <img key={index} src={imageItemLink} alt={`Slide ${index}`} />
+          <div key={index}>
+            <img src={imageItemLink} alt={`Slide ${index}`} />
+          </div>
         ))}
       </Carousel>
     </div>
   );
 }
 
-export default carousel;
+export default CarouselComponent;

@@ -3,9 +3,9 @@ import { CategoryInfos } from "./CategoryFullinfos";
 import CategoryCard from "./CategoryCard";
 import "./category.css";
 
-function category() {
+function Category() {
   return (
-    <div className="category-grid">
+    <div className="category-grid-container">
       {CategoryInfos.map((infos, index) => (
         <CategoryCard key={index} data={infos} />
       ))}
@@ -13,4 +13,4 @@ function category() {
   );
 }
 
-export default category;
+export default Category;

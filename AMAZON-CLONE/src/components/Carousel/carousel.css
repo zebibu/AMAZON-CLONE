@@ -1,74 +1,90 @@
-/* Full-width carousel with more height */
-.carousel .carousel-slider {
-  max-width: 100%;
-  height: 300px;
-  margin: 0 auto;
+/* Wrapper around carousel */
+.banner-with-categories {
   position: relative;
-  height: 500px; /* increased height */
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
+/* Carousel container */
+.carousel .carousel-slider {
+  max-width: 100%;
+  height: 500px; /* big Amazon-like banner */
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Images */
 .carousel .slide img {
   width: 100%;
-  height: 674px;
+  height: 500px;
   object-fit: cover;
   display: block;
 }
 
-/* Fade overlay from the middle of the image */
+/* Dark gradient fade at bottom (like Amazon) */
 .carousel .slide::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50%; /* fade from middle */
-  background: linear-gradient(to top, rgba(19, 25, 33, 0.7), transparent 50%);
+  height: 40%; /* fade only lower part */
+  background: linear-gradient(to top, rgba(19, 25, 33, 0.7), transparent 60%);
   pointer-events: none;
 }
 
-/* Hide thumbnails and dots */
+/* Hide thumbnails + indicators + status */
 .carousel .thumbs-wrapper,
-.carousel .control-dots {
-  display: none;
+.carousel .control-dots,
+.carousel .carousel-status {
+  display: none !important;
 }
 
-/* Arrows styling */
+/* Arrow styles */
 .carousel .control-arrow {
   background: rgba(0, 0, 0, 0.3);
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   top: 50%;
   transform: translateY(-50%);
+  transition: background 0.3s ease;
+}
+
+.carousel .control-arrow:hover {
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .carousel .control-prev.control-arrow {
-  left: 10px;
+  left: 15px;
 }
 
 .carousel .control-next.control-arrow {
-  right: 10px;
+  right: 15px;
 }
 
 .carousel .control-arrow:before {
-  color: white;
+  color: #fff;
   font-size: 20px;
 }
 
-/* Fade transition between slides */
-.carousel .slide {
-  transition: opacity 1s ease-in-out;
-}
-
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 1024px) {
   .carousel .carousel-slider {
+    height: 400px;
+  }
+  .carousel .slide img {
     height: 400px;
   }
 }
 
 @media (max-width: 768px) {
   .carousel .carousel-slider {
+    height: 300px;
+  }
+  .carousel .slide img {
     height: 300px;
   }
   .carousel .control-arrow {
@@ -82,6 +98,9 @@
 
 @media (max-width: 480px) {
   .carousel .carousel-slider {
+    height: 200px;
+  }
+  .carousel .slide img {
     height: 200px;
   }
 }

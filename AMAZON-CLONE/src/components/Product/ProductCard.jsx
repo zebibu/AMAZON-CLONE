@@ -1,18 +1,27 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import CurrencyFormat from "../currencyFormat/CurrencyFormat";
 import "./Product.css";
 
-function ProductCard({ product }) {
-  if (!product) return null; // ✅ guard if no product passed
+function ProductCard({ product, products }) {
+  // Use either prop
+  const data = product || products;
+  if (!data) return null;
 
-  const { image, title, rating, price } = product;
+  const { id, image, title, rating, price } = data;
 
   return (
     <div className="product-card">
-      <a href="">
+      {/* Only use Link if id exists */}
+      {id ? (
+        <Link to={`/product/${id}`}>
+          <img src={image} alt={title} className="product-card__image" />
+        </Link>
+      ) : (
         <img src={image} alt={title} className="product-card__image" />
-      </a>
+      )}
+
       <div className="product-card__info">
         <h3 className="product-card__title">{title}</h3>
 

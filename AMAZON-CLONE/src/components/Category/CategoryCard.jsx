@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function CategoryCard({ data }) {
+  // console.log(data);
   return (
     <div className="category-card-box">
-      <a href="">
+      <Link to={`/category/${data.name}`}>
         <span>
           <h2 className="category-card-title">{data.title}</h2>
         </span>
@@ -12,8 +14,10 @@ function CategoryCard({ data }) {
           alt={data.title}
           className="category-card-image"
         />
-        <a className="category-card-link">Shop now</a>
-      </a>
+        <Link to="" className="category-card-link">
+          Shop now
+        </Link>
+      </Link>
     </div>
   );
 }

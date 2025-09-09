@@ -1,9 +1,12 @@
 import React from 'react'
+import LayOut from '../../components/LayOut/LayOut';
 
 function Signup() {
   return (
-  <div>Signup</div>
-  )
+    <LayOut>
+      <div>Signup</div>
+    </LayOut>
+  );
 }
 
 export default Signup

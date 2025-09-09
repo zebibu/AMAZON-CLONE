@@ -1,5 +1,6 @@
 import React from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
+import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import "./header.css";
@@ -13,12 +14,12 @@ function header() {
           {/* Left - Logo & Delivery */}
           <div className="header-left">
             {/* logo */}
-            <a href="" className="header-logo">
+            <Link to="/" className="header-logo">
               <img
                 src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
                 alt="amazon logo"
               />
-            </a>
+            </Link>
             {/* delivery */}
             <div className="header-location">
               <HiOutlineLocationMarker className="header-location-icon" />
@@ -56,26 +57,26 @@ function header() {
               </select>
             </div>
 
-            <a href="" className="header-link">
+            <Link to="/auth" className="header-link">
               <div>
                 <p className="header-small">Sign In</p>
                 <span className="header-bold">Account & Lists</span>
               </div>
-            </a>
+            </Link>
 
-            <a href="" className="header-link">
+            <Link to="/orders" className="header-link">
               <div>
                 <p className="header-small">Returns</p>
                 <span className="header-bold">& Orders</span>
               </div>
-            </a>
+            </Link>
 
             {/* 🛒 Cart */}
-            <a href="/cart" className="header-cart">
+            <Link to="/cart" className="header-cart">
               <span className="cart-count">0</span>
               <AiOutlineShoppingCart className="cart-icon" />
               <span className="cart-text">Cart</span>
-            </a>
+            </Link>
           </div>
         </section>
       </div>

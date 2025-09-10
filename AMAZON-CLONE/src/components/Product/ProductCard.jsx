@@ -5,7 +5,6 @@ import CurrencyFormat from "../currencyFormat/CurrencyFormat";
 import "./Product.css";
 
 function ProductCard({ product, products }) {
-  // Use either prop
   const data = product || products;
   if (!data) return null;
 
@@ -13,7 +12,7 @@ function ProductCard({ product, products }) {
 
   return (
     <div className="product-card">
-      {/* Only use Link if id exists */}
+      
       {id ? (
         <Link to={`/product/${id}`}>
           <img src={image} alt={title} className="product-card__image" />

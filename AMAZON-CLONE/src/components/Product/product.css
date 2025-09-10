@@ -1,4 +1,4 @@
-/* Container for all products */
+/* ================= Grid Layout for Results Page ================= */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -8,7 +8,7 @@
   padding-top: 15%;
 }
 
-/* Individual product card */
+/* Individual product card (default grid) */
 .product-card {
   background-color: white;
   border-radius: 8px;
@@ -30,6 +30,7 @@
   height: 200px;
   object-fit: contain;
   margin-bottom: 10px;
+  border-radius: 4px;
 }
 
 /* Product title */
@@ -39,6 +40,7 @@
   min-height: 48px;
   margin-bottom: 10px;
   color: #111;
+  padding: 0 5px; /* small horizontal padding */
 }
 
 /* Rating section */
@@ -46,6 +48,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  padding: 0 5px; /* small horizontal padding */
 }
 
 .product-card__rating-count {
@@ -60,6 +63,7 @@
   font-weight: 600;
   margin-bottom: 10px;
   color: #b12704;
+  padding: 0 5px; /* small horizontal padding */
 }
 
 /* Add to cart button */
@@ -71,8 +75,99 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin: 0 5px 0 5px; /* small horizontal padding */
 }
 
 .product-card__button:hover {
   background-color: #f7ca00;
+}
+
+/* ================= Flex Layout for Product Detail / Horizontal Cards ================= */
+.product-card-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 20px; /* gap between image and info */
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product-card-flex:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Image on the left */
+.product-card-flex .product-card__image {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 8px;
+  margin-bottom: 0;
+}
+
+/* Info section on the right */
+.product-card-flex .product-card__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  gap: 8px; /* small gap between elements */
+  padding: 10px; /* padding for title, description, rating, price, button */
+}
+
+/* Remove default margins from elements */
+.product-card-flex .product-card__title,
+.product-card-flex .product-card__rating,
+.product-card-flex .product-card__price,
+.product-card-flex .product-card__button {
+  margin: 0;
+}
+
+/* Product description */
+.product-card__description {
+  font-size: 14px;
+  color: #555;
+  margin: 0; /* controlled via padding */
+  line-height: 1.4;
+  padding: 0 5px; /* small horizontal padding */
+}
+
+/* Optional: small spacing between items */
+.product-card-flex .product-card__title {
+  margin-top: 0;
+  padding-bottom: 4px;
+}
+
+.product-card-flex .product-card__rating {
+  margin-top: 4px;
+}
+
+.product-card-flex .product-card__price {
+  margin-top: 4px;
+}
+
+.product-card-flex .product-card__button {
+  margin-top: 6px;
+}
+
+/* ================= Responsive for Small Screens ================= */
+@media (max-width: 768px) {
+  .product-card-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-card-flex .product-card__image {
+    width: 80%;
+    height: auto;
+  }
+
+  .product-card-flex .product-card__info {
+    width: 100%;
+    gap: 6px; /* smaller gap for mobile */
+    padding: 8px; /* slightly smaller padding */
+  }
 }

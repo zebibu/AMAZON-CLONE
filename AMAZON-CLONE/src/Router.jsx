@@ -13,7 +13,7 @@ function Routing() {
   return (
     <Router>
       <Routes>
-        {/* 👇 Default route (Landing Page) */}
+        {/* Default route (Landing Page) */}
         <Route path="/" element={<Landing />} />
 
         {/* Other routes */}

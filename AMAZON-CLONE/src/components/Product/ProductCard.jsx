@@ -6,7 +6,7 @@ import "./Product.css";
 import { DataContext } from "../DataProvider/DataProvider";
 import { Type } from "../../Utility/actionType";
 
-function ProductCard({ product, products, flex, renderDesc }) {
+function ProductCard({ product, products, flex, renderDesc, renderAdd }) {
   const data = product || products;
   if (!data) return null;
 
@@ -49,9 +49,11 @@ function ProductCard({ product, products, flex, renderDesc }) {
           <CurrencyFormat amount={price} />
         </div>
 
-        <button className="product-card__button" onClick={addTocart}>
-          Add to cart
-        </button>
+        {renderAdd && (
+          <button className="product-card__button" onClick={addTocart}>
+            Add to cart
+          </button>
+        )}
       </div>
     </div>
   );

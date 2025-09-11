@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import "./header.css";
 import LowerHeader from "./LowerHeader";
+import { DataContext } from "../DataProvider/DataProvider";
 
 function header() {
+  const [{ basket }, dispatch] = useContext(DataContext);
+
   return (
-    <>
+    <section className="fixed">
       <div className="header">
         <section className="header-container">
           {/* Left - Logo & Delivery */}
@@ -73,7 +76,8 @@ function header() {
 
             {/* 🛒 Cart */}
             <Link to="/cart" className="header-cart">
-              <span className="cart-count">0</span>
+              {/* ✅ fix: basket.length */}
+              <span className="cart-count">{basket.length}</span>
               <AiOutlineShoppingCart className="cart-icon" />
               <span className="cart-text">Cart</span>
             </Link>
@@ -81,7 +85,7 @@ function header() {
         </section>
       </div>
       <LowerHeader />
-    </>
+    </section>
   );
 }
 

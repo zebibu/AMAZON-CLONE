@@ -16,10 +16,9 @@ function Signup() {
       alert("Passwords do not match!");
       return;
     }
-    // Add signup logic here (Firebase, backend, etc.)
     console.log({ name, email, password });
     alert("Account created successfully!");
-    navigate("/auth"); // Redirect to Sign In page
+    navigate("/auth"); 
   };
 
   return (

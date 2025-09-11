@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LayOut from "../../components/LayOut/LayOut";
-import "./Signup.css"; // Reusing the same CSS
+import "./Signup.css";
 
 function Signin() {
   const [email, setEmail] = useState("");
@@ -10,10 +10,10 @@ function Signin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add sign in logic here (Firebase, backend, etc.)
+    
     console.log({ email, password });
     alert("Signed in successfully!");
-    navigate("/"); // Redirect to home page
+    navigate("/"); 
   };
 
   return (

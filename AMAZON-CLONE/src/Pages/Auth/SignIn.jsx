@@ -1,42 +1,27 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LayOut from "../../components/LayOut/LayOut";
-import "./Signup.css";
+import "./Signup.css"; // Reusing the same CSS
 
-function Signup() {
-  const [name, setName] = useState("");
+function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-    // Add signup logic here (Firebase, backend, etc.)
-    console.log({ name, email, password });
-    alert("Account created successfully!");
-    navigate("/auth"); // Redirect to Sign In page
+    // Add sign in logic here (Firebase, backend, etc.)
+    console.log({ email, password });
+    alert("Signed in successfully!");
+    navigate("/"); // Redirect to home page
   };
 
   return (
     <LayOut>
       <div className="signup-container">
         <div className="signup-box">
-          <h1>Create Account</h1>
+          <h1>Sign-In</h1>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Your Name</label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -55,22 +40,13 @@ function Signup() {
               required
             />
 
-            <label htmlFor="confirmPassword">Re-enter Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-
             <button type="submit" className="signup-button">
-              Continue
+              Sign In
             </button>
           </form>
 
           <p className="signup-footer">
-            Already have an account? <Link to="/auth">Sign in</Link>
+            New to Amazon? <Link to="/signup">Create your account</Link>
           </p>
         </div>
       </div>
@@ -78,4 +54,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Signin;

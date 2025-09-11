@@ -26,6 +26,14 @@ function Signup() {
     <LayOut>
       <div className="signup-container">
         <div className="signup-box">
+          {/* Amazon Logo */}
+          <Link to="/" className="signup-logo">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
+              alt="Amazon Logo"
+            />
+          </Link>
+
           <h1>Create Account</h1>
           <form onSubmit={handleSubmit}>
             <label htmlFor="name">Your Name</label>

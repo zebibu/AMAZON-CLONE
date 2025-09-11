@@ -1,4 +1,15 @@
 /* Signup.css */
+.signup-logo {
+  display: block;
+  margin: 0 auto 20px;
+  width: 120px;
+}
+
+.signup-logo img {
+  width: 100%;
+  object-fit: contain;
+}
+
 
 .signup-container {
   display: flex;

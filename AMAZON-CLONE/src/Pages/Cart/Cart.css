@@ -1,5 +1,6 @@
 /* Cart.css */
 
+/* Overall cart container */
 .cart-container {
   display: flex;
   justify-content: space-between;
@@ -7,6 +8,7 @@
   padding: 20px;
   background-color: #eaeaea;
   min-height: 100vh;
+  font-family: Arial, sans-serif;
 }
 
 /* Left side: basket items */
@@ -33,6 +35,76 @@
   font-size: 16px;
   color: #555;
   padding: 10px 0;
+}
+
+/* Product card styling inside cart */
+.cart-items .product-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.cart-items .product-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.cart-items .product-card h4 {
+  font-size: 15px;
+  margin: 0;
+}
+
+.cart-items .product-card p {
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.cart-items .product-card button {
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  background: #f0f0f0;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.cart-items .product-card button:hover {
+  background: #e3e3e3;
+}
+
+/* Increment / Decrement buttons for each item */
+.item-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.item-controls button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.item-controls button:hover {
+  background-color: #e3e3e3;
+  transform: scale(1.05);
+}
+
+.item-controls span {
+  min-width: 20px;
+  text-align: center;
+  font-size: 16px;
 }
 
 /* Right side: summary box */

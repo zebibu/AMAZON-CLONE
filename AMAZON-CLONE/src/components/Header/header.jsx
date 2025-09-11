@@ -10,6 +10,10 @@ import { DataContext } from "../DataProvider/DataProvider";
 function header() {
   const [{ basket }, dispatch] = useContext(DataContext);
 
+  const totalItems = basket?.reduce((amount, item) => {
+    return item.amount + amount;
+  }, 0); // <-- added missing closing parentheses and initial value
+
   return (
     <section className="fixed">
       <div className="header">
@@ -76,8 +80,7 @@ function header() {
 
             {/* 🛒 Cart */}
             <Link to="/cart" className="header-cart">
-              {/* ✅ fix: basket.length */}
-              <span className="cart-count">{basket.length}</span>
+              <span className="cart-count">{totalItems}</span>
               <AiOutlineShoppingCart className="cart-icon" />
               <span className="cart-text">Cart</span>
             </Link>

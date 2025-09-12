@@ -17,7 +17,11 @@ function CarouselComponent() {
       >
         {img.map((imageItemLink, index) => (
           <div key={index}>
-            <img src={imageItemLink} alt={`Slide ${index}`} />
+            <img
+              key={imageItemLink}
+              src={imageItemLink}
+              alt={`Slide ${index}`}
+            />
           </div>
         ))}
       </Carousel>

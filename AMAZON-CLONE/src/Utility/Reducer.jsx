@@ -3,6 +3,7 @@ import { Type } from "./actionType";
 
 export const initialState = {
   basket: [],
+  user: null,
 };
 
 export const Reducer = (state, action) => {
@@ -49,6 +50,13 @@ export const Reducer = (state, action) => {
         ...state,
         basket : newBasket
       }
+    
+    
+      case Type.SET_USER:
+      return {
+        ...state,
+        user: action.user,
+      };
 
     default:
       return state;

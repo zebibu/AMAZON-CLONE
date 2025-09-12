@@ -6,13 +6,14 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import "./header.css";
 import LowerHeader from "./LowerHeader";
 import { DataContext } from "../DataProvider/DataProvider";
+import { auth} from "../../Utility/firebase";
 
-function header() {
-  const [{ basket }, dispatch] = useContext(DataContext);
+function Header() {
+  const [{ basket, user }, dispatch] = useContext(DataContext);
 
   const totalItems = basket?.reduce((amount, item) => {
     return item.amount + amount;
-  }, 0); // <-- added missing closing parentheses and initial value
+  }, 0);
 
   return (
     <section className="fixed">
@@ -64,10 +65,19 @@ function header() {
               </select>
             </div>
 
-            <Link to="/auth" className="header-link">
-              <div>
-                <p className="header-small">Sign In</p>
-                <span className="header-bold">Account & Lists</span>
+            <Link to={!user && "/auth"} className="header-link">
+              <div className="header-small">
+                {user ? (
+                  <>
+                    <p>Hello {user?.email?.split("@")[0]}</p>
+                    <span onClick={()=>auth.signOut()}>Sign Out</span>
+                  </>
+                ) : (
+                  <>
+                    <p>Hello, sign In</p>
+                    <span className="header-bold">Account & Lists</span>
+                  </>
+                )}
               </div>
             </Link>
 
@@ -92,4 +102,4 @@ function header() {
   );
 }
 
-export default header;
+export default Header;

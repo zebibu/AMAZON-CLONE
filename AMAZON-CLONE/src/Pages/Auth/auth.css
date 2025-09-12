@@ -109,3 +109,89 @@
 .auth-register-btn:hover {
   background-color: #d6d8db;
 }
+/* Large screens (1200px and up) */
+@media (min-width: 1200px) {
+  .auth-container {
+    width: 400px;
+    padding: 30px;
+  }
+
+  .auth-title {
+    font-size: 32px;
+  }
+
+  .auth-signin-btn {
+    font-size: 16px;
+    padding: 12px;
+  }
+}
+
+/* Medium screens (768px to 1199px) */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .auth-container {
+    width: 90%;
+    padding: 25px;
+  }
+
+  .auth-title {
+    font-size: 26px;
+  }
+
+  .auth-signin-btn {
+    font-size: 15px;
+    padding: 10px;
+  }
+}
+
+/* Small screens (less than 768px) */
+@media (max-width: 767px) {
+  .auth {
+    padding: 20px 10px;
+  }
+
+  .auth-logo img {
+    width: 80px;
+  }
+
+  .auth-container {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .auth-title {
+    font-size: 24px;
+  }
+
+  .auth-input-group input {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .auth-signin-btn,
+  .auth-register-btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .auth-agreement {
+    font-size: 11px;
+  }
+}
+
+/* Extra small screens (less than 480px) */
+@media (max-width: 479px) {
+  .auth-title {
+    font-size: 20px;
+  }
+
+  .auth-input-group input {
+    padding: 7px;
+    font-size: 12px;
+  }
+
+  .auth-signin-btn,
+  .auth-register-btn {
+    font-size: 13px;
+    padding: 7px;
+  }
+}

@@ -153,21 +153,135 @@
   margin-top: 6px;
 }
 
-/* ================= Responsive for Small Screens ================= */
-@media (max-width: 768px) {
+/* ================= Responsive for Different Screens ================= */
+
+/* 🖥️ Extra Large Screens (≥ 1600px) */
+@media (min-width: 1600px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 40px;
+  }
+
+  .product-card__image {
+    height: 260px;
+  }
+
+  .product-card-flex .product-card__image {
+    width: 500px;
+    height: 500px;
+  }
+}
+
+/* 💻 Large Desktops (1200px – 1599px) */
+@media (max-width: 1599px) and (min-width: 1200px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+    padding: 30px;
+  }
+
+  .product-card__image {
+    height: 220px;
+  }
+
+  .product-card-flex .product-card__image {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+/* 🖥️ Normal Desktops / Small Laptops (992px – 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 25px;
+  }
+
+  .product-card__image {
+    height: 200px;
+  }
+
+  .product-card-flex .product-card__image {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+/* 📱 Tablets Landscape (768px – 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .product-card__image {
+    height: 180px;
+  }
+
+  .product-card-flex {
+    flex-direction: row;
+  }
+
+  .product-card-flex .product-card__image {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+/* 📱 Tablets Portrait & Large Phones (576px – 767px) */
+@media (max-width: 767px) and (min-width: 576px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .product-card__image {
+    height: 160px;
+  }
+
   .product-card-flex {
     flex-direction: column;
     align-items: center;
   }
 
   .product-card-flex .product-card__image {
-    width: 80%;
+    width: 70%;
+    height: auto;
+  }
+}
+
+/* 📱 Small Phones (< 576px) */
+@media (max-width: 575px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .product-card__image {
+    height: 140px;
+  }
+
+  .product-card-flex {
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+  }
+
+  .product-card-flex .product-card__image {
+    width: 90%;
     height: auto;
   }
 
-  .product-card-flex .product-card__info {
-    width: 100%;
-    gap: 6px; /* smaller gap for mobile */
-    padding: 8px; /* slightly smaller padding */
+  .product-card__title {
+    font-size: 14px;
+  }
+
+  .product-card__price {
+    font-size: 16px;
   }
 }

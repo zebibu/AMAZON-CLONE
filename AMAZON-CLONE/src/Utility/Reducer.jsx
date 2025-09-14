@@ -1,21 +1,22 @@
+// Reducer.jsx
 import { Type } from "./actionType";
 
-// Initialize basket from localStorage
 const savedBasket = JSON.parse(localStorage.getItem("basket")) || [];
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const initialState = {
   basket: savedBasket,
   user: null,
 };
 
 export const Reducer = (state, action) => {
-  let updatedBasket;
-
   switch (action.type) {
-    case Type.ADD_TO_BASKET:
+    case Type.ADD_TO_BASKET: {
       const existingItem = state.basket.find(
         (item) => item.id === action.item.id
       );
+
+      let updatedBasket;
 
       if (!existingItem) {
         updatedBasket = [...state.basket, { ...action.item, amount: 1 }];
@@ -27,15 +28,17 @@ export const Reducer = (state, action) => {
         );
       }
 
-      localStorage.setItem("basket", JSON.stringify(updatedBasket)); // persist
+      localStorage.setItem("basket", JSON.stringify(updatedBasket));
+
       return {
         ...state,
         basket: updatedBasket,
       };
+    }
 
-    case Type.REMOVE_FROM_BASKET:
+    case Type.REMOVE_FROM_BASKET: {
       const index = state.basket.findIndex((item) => item.id === action.id);
-      updatedBasket = [...state.basket];
+      let updatedBasket = [...state.basket];
 
       if (index >= 0) {
         if (updatedBasket[index].amount > 1) {
@@ -48,24 +51,28 @@ export const Reducer = (state, action) => {
         }
       }
 
-      localStorage.setItem("basket", JSON.stringify(updatedBasket)); // persist
+      localStorage.setItem("basket", JSON.stringify(updatedBasket));
+
       return {
         ...state,
         basket: updatedBasket,
       };
+    }
 
-    case Type.SET_USER:
-      return {
-        ...state,
-        user: action.user,
-      };
-
-    case Type.CLEAR_BASKET:
-      localStorage.removeItem("basket"); // clear storage after payment
+    case Type.CLEAR_BASKET: {
+      localStorage.removeItem("basket");
       return {
         ...state,
         basket: [],
       };
+    }
+
+    case Type.SET_USER: {
+      return {
+        ...state,
+        user: action.user,
+      };
+    }
 
     default:
       return state;

@@ -1,55 +1,82 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import LayOut from "../../components/LayOut/LayOut";
 import { DataContext } from "../../components/DataProvider/DataProvider";
 import ProductCard from "../../components/Product/ProductCard";
 import CurrencyFormat from "../../components/currencyFormat/CurrencyFormat";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import { axiosInstance } from "../../Api/axios";
 import "./Payments.css";
+import { ClipLoader } from "react-spinners";
+import { db } from "../../Utility/firebase";
+
 
 function Payment() {
   const [{ basket, user }] = useContext(DataContext);
+
+  
+  
+  // eslint-disable-next-line no-unused-vars
+  const totalItem = basket?.reduce((amount, item) => {
+    return item.amount + amount;
+  }, 0);
+
+  const total = basket?.reduce(
+    (amount, item) => amount + item.price * item.amount,
+    0
+  );
+
+  const [cardError, setCardError] = useState(null);
+  const [processing, setProcessing] = useState(false);
+
   const stripe = useStripe();
+
   const elements = useElements();
 
-  const [clientSecret, setClientSecret] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [cardError, setCardError] = useState(""); // real-time card error
-
-  const total = basket?.reduce((amount, item) => amount + item.price * item.amount, 0) || 0;
-
-  useEffect(() => {
-    fetch(`http://localhost:3000/payments/create?total=${Math.max(Math.round(total * 100), 100)}`, {
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret))
-      .catch((err) => console.error("Error fetching clientSecret:", err));
-  }, [total]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!stripe || !elements || !clientSecret) return;
-
-    setLoading(true);
-    setCardError("");
-
-    const card = elements.getElement(CardElement);
-
-    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: { card, billing_details: { email: user?.email } },
-    });
-
-    if (error) {
-      setCardError(error.message); // English error message
-    } else if (paymentIntent.status === "succeeded") {
-      alert("Payment successful!");
-      window.location.href = "/orders";
-    }
-
-    setLoading(false);
+  const handdleChange = (e) => {
+    e?.error?.message ? setCardError(e.error.message) : setCardError("");
   };
 
+  const handdlePayment = async (e) => {
+    e.preventDefault();
+
+    try {
+      setProcessing(true);
+      const response = await axiosInstance({
+        method: "POST",
+        url: `/payment/create?total=${total * 100}`,
+      });
+
+      console.log("Response from backend:", response.data);
+
+      const clientSecret = response.data?.clientSecret;
+
+      const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+  payment_method: {
+    card: elements.getElement(CardElement)
+  },
+});
+
+      console.log("Payment successful:", paymentIntent);
+
+      setProcessing(false);
+
+      // Save order in Firestore (Firebase v9)
+      await db.collection('users').doc(user?.uid).collection('orders').doc(paymentIntent.id).set({
+        basket: basket,
+        amount: paymentIntent.amount,
+        created: paymentIntent.created,
+      });
+
+      
+  
+    } 
+    
+    catch (error) {
+      console.error(error);
+      setProcessing(false);
+    }
+  };
   return (
     <LayOut>
       <section className="payment-container">
@@ -59,7 +86,9 @@ function Payment() {
 
         {/* Delivery Address */}
         <div className="payment-section">
-          <div className="payment-title"><h3>Delivery Address</h3></div>
+          <div className="payment-title">
+            <h3>Delivery Address</h3>
+          </div>
           <div className="payment-address">
             <p>{user?.email || "Guest"}</p>
             <p>123 Main Street</p>
@@ -69,36 +98,59 @@ function Payment() {
 
         {/* Review Items */}
         <div className="payment-section">
-          <div className="payment-title"><h3>Review Items</h3></div>
+          <div className="payment-title">
+            <h3>Review Items</h3>
+          </div>
           <div className="payment-items">
-            {basket?.length > 0 ? basket.map((item, i) => (
-              <ProductCard key={i} product={item} flex renderAdd={false} renderDesc />
-            )) : <p>Your basket is empty.</p>}
+            {basket?.length > 0 ? (
+              basket.map((item, i) => (
+                <ProductCard
+                  key={i}
+                  product={item}
+                  flex={true}
+                  renderDesc
+                />
+              ))
+            ) : (
+              <p>Your basket is empty.</p>
+            )}
           </div>
         </div>
 
         {/* Payment Method */}
         <div className="payment-section">
-          <div className="payment-title"><h3>Payment Method</h3></div>
+          <div className="payment-title">
+            <h3>Payment Method</h3>
+          </div>
           <div className="payment-details">
             <CurrencyFormat amount={total} className="currency-format" />
 
-            <form onSubmit={handleSubmit}>
+            <form onChange={handdleChange} onSubmit={handdlePayment}>
+              {cardError && <small style={{ color: "red" }}>{cardError}</small>}
               <CardElement
                 options={{
                   style: {
-                    base: { fontSize: "16px", color: "#424770", "::placeholder": { color: "#aab7c4" } },
+                    base: {
+                      fontSize: "16px",
+                      color: "#424770",
+                      "::placeholder": { color: "#aab7c4" },
+                    },
                     invalid: { color: "#9e2146" },
                   },
                 }}
-                onChange={(e) => setCardError(e.error ? e.error.message : "")}
+                onChange={handdleChange}
               />
-              {cardError && <div className="card-error">{cardError}</div>}
-              <button type="submit" disabled={!stripe || loading} className="payment-button">
-                {loading ? "Processing..." : "Pay Now"}
+              <button type="submit" className="payment-button">
+                {processing ? (
+                  <div>
+                    <ClipLoader color="gray" size={20} />
+                    <p>Please wait...</p>
+                  </div>
+                ) : (
+                  "Pay Now"
+                )}
               </button>
             </form>
-            {!clientSecret && <p>Loading payment form...</p>}
           </div>
         </div>
       </section>

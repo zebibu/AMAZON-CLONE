@@ -1,12 +1,15 @@
-// Reducer.jsx
 import { Type } from "./actionType";
+import { auth } from "./firebase";  // make sure this points to your firebase.js
 
 const savedBasket = JSON.parse(localStorage.getItem("basket")) || [];
+
+// Get the current Firebase user if already logged in
+const currentUser = auth.currentUser || null;
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const initialState = {
   basket: savedBasket,
-  user: null,
+  user: currentUser,  
 };
 
 export const Reducer = (state, action) => {

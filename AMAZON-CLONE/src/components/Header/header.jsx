@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Link } from "react-router-dom";
@@ -6,7 +7,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import "./header.css";
 import LowerHeader from "./LowerHeader";
 import { DataContext } from "../DataProvider/DataProvider";
-import { auth} from "../../Utility/firebase";
+import { auth } from "../../Utility/firebase";
 
 function Header() {
   const [{ basket, user }, dispatch] = useContext(DataContext);
@@ -70,7 +71,7 @@ function Header() {
                 {user ? (
                   <>
                     <p>Hello {user?.email?.split("@")[0]}</p>
-                    <span onClick={()=>auth.signOut()}>Sign Out</span>
+                    <span onClick={() => auth.signOut()}>Sign Out</span>
                   </>
                 ) : (
                   <>

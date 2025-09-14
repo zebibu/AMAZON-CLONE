@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // ✅ added useNavigate import
 import LayOut from "../../components/LayOut/LayOut";
 import { DataContext } from "../../components/DataProvider/DataProvider";
 import ProductCard from "../../components/Product/ProductCard";
@@ -10,12 +10,9 @@ import "./Payments.css";
 import { ClipLoader } from "react-spinners";
 import { db } from "../../Utility/firebase";
 
-
 function Payment() {
   const [{ basket, user }] = useContext(DataContext);
 
-  
-  
   // eslint-disable-next-line no-unused-vars
   const totalItem = basket?.reduce((amount, item) => {
     return item.amount + amount;
@@ -30,8 +27,9 @@ function Payment() {
   const [processing, setProcessing] = useState(false);
 
   const stripe = useStripe();
-
   const elements = useElements();
+
+  const navigate = useNavigate();
 
   const handdleChange = (e) => {
     e?.error?.message ? setCardError(e.error.message) : setCardError("");
@@ -47,36 +45,40 @@ function Payment() {
         url: `/payment/create?total=${total * 100}`,
       });
 
-      console.log("Response from backend:", response.data);
+      // console.log("Response from backend:", response.data);
 
       const clientSecret = response.data?.clientSecret;
 
       const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-  payment_method: {
-    card: elements.getElement(CardElement)
-  },
-});
-
-      console.log("Payment successful:", paymentIntent);
-
-      setProcessing(false);
-
-      // Save order in Firestore (Firebase v9)
-      await db.collection('users').doc(user?.uid).collection('orders').doc(paymentIntent.id).set({
-        basket: basket,
-        amount: paymentIntent.amount,
-        created: paymentIntent.created,
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
       });
 
-      
-  
-    } 
-    
-    catch (error) {
+      // console.log("Payment successful:", paymentIntent);
+
+      // Save order in Firestore
+      await db
+        .collection("users")
+        .doc(user?.uid)
+        .collection("orders")
+        .doc(paymentIntent.id)
+        .set({
+          basket: basket,
+          amount: paymentIntent.amount,
+          created: paymentIntent.created,
+        });
+
+      setProcessing(false);
+      navigate("/orders", {
+        state: { msg: "your order is placed successfully" },
+      });
+    } catch (error) {
       console.error(error);
       setProcessing(false);
     }
   };
+
   return (
     <LayOut>
       <section className="payment-container">
@@ -104,12 +106,7 @@ function Payment() {
           <div className="payment-items">
             {basket?.length > 0 ? (
               basket.map((item, i) => (
-                <ProductCard
-                  key={i}
-                  product={item}
-                  flex={true}
-                  renderDesc
-                />
+                <ProductCard key={i} product={item} flex={true} renderDesc />
               ))
             ) : (
               <p>Your basket is empty.</p>

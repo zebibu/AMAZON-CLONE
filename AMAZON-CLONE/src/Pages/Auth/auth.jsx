@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Auth.css";
 import { auth } from "../../Utility/firebase";
 import {
@@ -15,6 +16,8 @@ function Auth() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [{ user }, dispatch] = useContext(DataContext);
+  const navStateData = useLocation();
+  console.log(navStateData);
   const [loading, setLoading] = useState({
     signIn: false,
     signUp: false,
@@ -37,7 +40,7 @@ function Auth() {
             user: userInfo.user,
           });
           setLoading({ ...loading, signIn: false });
-          navigate("/");
+          navigate(navStateData.state?.redirect || "/");
         })
         .catch((err) => {
           setError(err.message);
@@ -52,7 +55,7 @@ function Auth() {
             user: userInfo.user,
           });
           setLoading({ ...loading, signUp: false });
-          navigate("/");
+          navigate(navStateData.state?.redirect || "/");
         })
         .catch((err) => {
           // console.log(err.message);
@@ -75,6 +78,10 @@ function Auth() {
       {/* form */}
       <div className="auth-container">
         <h1 className="auth-title">Sign-In</h1>
+        {navStateData.state?.msg && (
+          <small style={{ color: "red",
+           }}>{navStateData.state.msg}</small>
+        )}
         <form className="auth-form">
           <div className="auth-input-group">
             <label htmlFor="email">Email</label>

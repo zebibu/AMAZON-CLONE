@@ -70,6 +70,11 @@ export const Reducer = (state, action) => {
       };
     }
 
+    case Type.EMPITY_BASKET: return {
+      ...state,
+      basket: [],
+    };
+
     case Type.SET_USER: {
       return {
         ...state,

@@ -1,0 +1,70 @@
+/* Container for the entire orders page */
+.orders-page {
+  padding: 30px;
+  background-color: #f3f3f3;
+  min-height: 100vh;
+  font-family: "Arial", sans-serif;
+}
+
+/* Page title */
+.orders-page-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 25px;
+}
+
+/* Orders container */
+.orders-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Each order card */
+.order-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Order header (Order ID) */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.order-id {
+  font-weight: 600;
+  color: #007185; /* Amazon-style blue */
+  font-size: 16px;
+}
+
+/* Container for products inside each order */
+.order-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Horizontal line inside order card */
+.order-divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 10px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .order-items-container {
+    flex-direction: column;
+  }
+}

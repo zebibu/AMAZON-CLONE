@@ -9,11 +9,13 @@ import { axiosInstance } from "../../Api/axios";
 import "./Payments.css";
 import { ClipLoader } from "react-spinners";
 import { db } from "../../Utility/firebase";
+import { Type } from "../../Utility/actionType";
+
+
 
 function Payment() {
-  const [{ basket, user }] = useContext(DataContext);
+  const [{ basket, user }, dispatch] = useContext(DataContext);
 
-  // eslint-disable-next-line no-unused-vars
   const totalItem = basket?.reduce((amount, item) => {
     return item.amount + amount;
   }, 0);
@@ -69,6 +71,12 @@ function Payment() {
           created: paymentIntent.created,
         });
 
+      // Clear basket
+      
+      dispatch({ type:Type.EMPITY_BASKET });
+
+
+
       setProcessing(false);
       navigate("/orders", {
         state: { msg: "your order is placed successfully" },
@@ -83,7 +91,7 @@ function Payment() {
     <LayOut>
       <section className="payment-container">
         <h2>
-          Checkout (<Link to="/cart">{basket?.length || 0} items</Link>)
+          Checkout (<Link to="/cart">{totalItem} items</Link>)
         </h2>
 
         {/* Delivery Address */}

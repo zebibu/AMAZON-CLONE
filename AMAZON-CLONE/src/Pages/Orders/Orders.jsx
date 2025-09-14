@@ -7,10 +7,10 @@ import ProductCard from "../../components/Product/ProductCard";
 import "./Orders.css";
 
 function Orders() {
-  // eslint-disable-next-line no-unused-vars
-  const [{ user }, dispatch] = useContext(DataContext);
+  
+  const [{ user }] = useContext(DataContext);
 
-  // eslint-disable-next-line no-unused-vars
+  
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {

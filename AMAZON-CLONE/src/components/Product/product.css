@@ -1,22 +1,23 @@
-/* ================= Grid Layout for Results Page ================= */
+/* ================= Grid Layout for Products ================= */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
   padding: 20px;
-  background-color: #f3f3f3;
-  padding-top: 15%;
+  background-color: #eaeaea; /* same as cart container */
 }
 
-/* Individual product card (default grid) */
+/* Individual product card (like cart item) */
 .product-card {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* like cart product-card */
+  gap: 20px;
   padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  align-items: flex-start;
 }
 
 .product-card:hover {
@@ -26,11 +27,21 @@
 
 /* Product image */
 .product-card__image {
-  width: 100%;
-  height: 200px;
+  width: 150px; /* same as cart */
+  height: 150px;
   object-fit: contain;
-  margin-bottom: 10px;
   border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* Info section */
+.product-card__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  gap: 8px;
+  padding: 0 5px;
 }
 
 /* Product title */
@@ -38,32 +49,30 @@
   font-size: 16px;
   font-weight: 500;
   min-height: 48px;
-  margin-bottom: 10px;
-  color: #111;
-  padding: 0 5px; /* small horizontal padding */
+  margin: 0;
+}
+
+/* Product description */
+.product-card__description {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+  line-height: 1.4;
 }
 
 /* Rating section */
 .product-card__rating {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  padding: 0 5px; /* small horizontal padding */
-}
-
-.product-card__rating-count {
-  margin-left: 5px;
-  color: #555;
   font-size: 12px;
+  color: #555;
 }
 
 /* Price */
 .product-card__price {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 10px;
   color: #b12704;
-  padding: 0 5px; /* small horizontal padding */
 }
 
 /* Add to cart button */
@@ -75,205 +84,56 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
-  margin: 0 5px 0 5px; /* small horizontal padding */
 }
 
 .product-card__button:hover {
   background-color: #f7ca00;
 }
 
-/* ================= Flex Layout for Product Detail / Horizontal Cards ================= */
-.product-card-flex {
-  display: flex;
-  flex-direction: row;
-  gap: 20px; /* gap between image and info */
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+/* ================= Responsive ================= */
 
-.product-card-flex:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-/* Image on the left */
-.product-card-flex .product-card__image {
-  width: 400px;
-  height: 400px;
-  object-fit: contain;
-  flex-shrink: 0;
-  border-radius: 8px;
-  margin-bottom: 0;
-}
-
-/* Info section on the right */
-.product-card-flex .product-card__info {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  flex: 1;
-  gap: 8px; /* small gap between elements */
-  padding: 10px; /* padding for title, description, rating, price, button */
-}
-
-/* Remove default margins from elements */
-.product-card-flex .product-card__title,
-.product-card-flex .product-card__rating,
-.product-card-flex .product-card__price,
-.product-card-flex .product-card__button {
-  margin: 0;
-}
-
-/* Product description */
-.product-card__description {
-  font-size: 14px;
-  color: #555;
-  margin: 0; /* controlled via padding */
-  line-height: 1.4;
-  padding: 0 5px; /* small horizontal padding */
-}
-
-/* Optional: small spacing between items */
-.product-card-flex .product-card__title {
-  margin-top: 0;
-  padding-bottom: 4px;
-}
-
-.product-card-flex .product-card__rating {
-  margin-top: 4px;
-}
-
-.product-card-flex .product-card__price {
-  margin-top: 4px;
-}
-
-.product-card-flex .product-card__button {
-  margin-top: 6px;
-}
-
-/* ================= Responsive for Different Screens ================= */
-
-/* 🖥️ Extra Large Screens (≥ 1600px) */
-@media (min-width: 1600px) {
-  .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 40px;
-  }
-
-  .product-card__image {
-    height: 260px;
-  }
-
-  .product-card-flex .product-card__image {
-    width: 500px;
-    height: 500px;
-  }
-}
-
-/* 💻 Large Desktops (1200px – 1599px) */
-@media (max-width: 1599px) and (min-width: 1200px) {
-  .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 25px;
-    padding: 30px;
-  }
-
-  .product-card__image {
-    height: 220px;
-  }
-
-  .product-card-flex .product-card__image {
-    width: 400px;
-    height: 400px;
-  }
-}
-
-/* 🖥️ Normal Desktops / Small Laptops (992px – 1199px) */
-@media (max-width: 1199px) and (min-width: 992px) {
-  .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 25px;
-  }
-
-  .product-card__image {
-    height: 200px;
-  }
-
-  .product-card-flex .product-card__image {
-    width: 350px;
-    height: 350px;
-  }
-}
-
-/* 📱 Tablets Landscape (768px – 991px) */
+/* Tablets Landscape (768px – 991px) */
 @media (max-width: 991px) and (min-width: 768px) {
-  .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 15px;
-    padding: 20px;
-  }
-
-  .product-card__image {
-    height: 180px;
-  }
-
-  .product-card-flex {
+  .product-card {
     flex-direction: row;
-  }
-
-  .product-card-flex .product-card__image {
-    width: 280px;
-    height: 280px;
-  }
-}
-
-/* 📱 Tablets Portrait & Large Phones (576px – 767px) */
-@media (max-width: 767px) and (min-width: 576px) {
-  .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 12px;
-    padding: 15px;
-  }
-
-  .product-card__image {
-    height: 160px;
-  }
-
-  .product-card-flex {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .product-card-flex .product-card__image {
-    width: 70%;
-    height: auto;
-  }
-}
-
-/* 📱 Small Phones (< 576px) */
-@media (max-width: 575px) {
-  .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 10px;
-    padding: 10px;
-  }
-
-  .product-card__image {
-    height: 140px;
-  }
-
-  .product-card-flex {
-    flex-direction: column;
-    align-items: center;
     padding: 12px;
   }
 
-  .product-card-flex .product-card__image {
-    width: 90%;
+  .product-card__image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .product-card__title {
+    font-size: 15px;
+  }
+
+  .product-card__description {
+    font-size: 13px;
+  }
+
+  .product-card__price {
+    font-size: 16px;
+  }
+
+  .product-card__button {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}
+
+/* Small Phones (< 768px) */
+@media (max-width: 767px) {
+  .product-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .product-card__image {
+    width: 70%;
     height: auto;
   }
 
@@ -281,7 +141,16 @@
     font-size: 14px;
   }
 
+  .product-card__description {
+    font-size: 12px;
+  }
+
   .product-card__price {
-    font-size: 16px;
+    font-size: 14px;
+  }
+
+  .product-card__button {
+    padding: 5px 8px;
+    font-size: 12px;
   }
 }

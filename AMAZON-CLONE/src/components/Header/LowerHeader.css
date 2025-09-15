@@ -48,7 +48,7 @@
   font-size: 20px;
 }
 
-/* Mobile: Collapse into "All" */
+/* Mobile & Tablet adjustments */
 @media (max-width: 768px) {
   .lower-header ul {
     flex-direction: column;
@@ -56,17 +56,21 @@
     gap: 0;
   }
 
+  /* Collapse items except the first one */
   .lower-header li:not(:first-child) {
     max-height: 0;
     overflow: hidden;
     opacity: 0;
     transition: all 0.3s ease;
+    padding: 3px 6px; /* Smaller padding */
+    margin-left: 0;
   }
 
+  /* When menu is open */
   .lower-header ul.open li:not(:first-child) {
-    max-height: 100px; 
+    max-height: 50px; /* Reduced height */
     opacity: 1;
-    margin-left: 24px;
+    padding: 5px 10px; /* Slight padding for readability */
   }
 
   .lower-header li svg {
@@ -75,8 +79,9 @@
 }
 
 @media (max-width: 480px) {
-  .lower-header li:not(:first-child) {
-    max-height: 80px;
+  .lower-header ul.open li:not(:first-child) {
+    max-height: 45px; /* Slightly lower on small screens */
+    padding: 4px 8px;
   }
   .lower-header li svg {
     font-size: 16px;

@@ -1,71 +1,131 @@
-/* 🔹 Container for Results Page */
+/* ===============================
+   🔹 Products Container
+================================= */
 .products_container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  display: flex;
+  flex-wrap: wrap;          /* ✅ always wrap */
   gap: 20px;
-  padding: 20px 40px;
-  background-color: #fff;
+  padding: 20px;
+  justify-content: center;  /* center nicely */
+  background-color: #f9f9f9;
+  box-sizing: border-box;
 }
 
-/* 🔹 Product Card */
+/* ✅ Product Card */
 .product-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  flex: 1 1 220px;          /* base width 220px, grows/shrinks */
+  max-width: 300px;         /* prevents too wide on big screens */
+  min-width: 180px;         /* prevents squishing */
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
   background: #fff;
-  padding: 15px;
-  transition: box-shadow 0.2s ease-in-out;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.25s ease-in-out;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
 }
 
-/* 🔹 Product Image */
+/* ✅ Image */
 .product-card img {
   width: 100%;
   height: 220px;
   object-fit: contain;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  transition: transform 0.2s ease;
 }
 
-/* 🔹 Product Title */
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* ✅ Title */
 .product-card h2 {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: #111;
-  margin: 8px 0;
+  margin: 10px 0;
   line-height: 1.4;
-  min-height: 40px;
+  min-height: 42px;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .product-card h2:hover {
-  color: #007185; /* Amazon link blue */
+  color: #007185;
   text-decoration: underline;
 }
 
-/* 🔹 Product Price */
+/* ✅ Price */
 .product-card .price {
   font-size: 18px;
   font-weight: bold;
-  color: #B12704; /* Amazon red price */
+  color: #b12704;
   margin-top: 8px;
 }
 
-/* 🔹 Buy Button */
+/* ✅ Button */
 .product-card button {
-  background: #FFD814; /* Amazon yellow */
-  border: 1px solid #FCD200;
-  border-radius: 20px;
-  padding: 8px 12px;
+  background: #ffd814;
+  border: 1px solid #fcd200;
+  border-radius: 25px;
+  padding: 10px 14px;
   font-size: 14px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 12px;
   width: 100%;
   font-weight: bold;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .product-card button:hover {
-  background: #F7CA00;
+  background: #f7ca00;
+  transform: scale(1.02);
+}
+
+.product-card button:active {
+  transform: scale(0.98);
+}
+
+/* ===============================
+   🔹 Responsive Tweaks
+================================= */
+
+/* Phones */
+@media (max-width: 575px) {
+  .product-card {
+    flex: 1 1 100%;   /* full width on very small */
+    max-width: 100%;
+  }
+
+  .product-card img {
+    height: 160px;
+  }
+}
+
+/* Tablets */
+@media (min-width: 576px) and (max-width: 992px) {
+  .product-card {
+    flex: 1 1 45%;   /* ~2 per row */
+    max-width: 48%;
+  }
+
+  .product-card img {
+    height: 190px;
+  }
+}
+
+/* Desktops */
+@media (min-width: 993px) {
+  .product-card {
+    flex: 1 1 22%;   /* ~4 per row */
+    max-width: 24%;
+  }
 }

@@ -1,89 +1,96 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
-
 .lower-header {
-  background-color: #232f3e;
+  background-color: #232f3e;   
   color: white;
-  padding: 8px 20px;
+  padding: 10px 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  z-index: 1000;
 }
 
-/* Horizontal list */
-.lower-header ul {
+/*  Menu List */
+.menu-list {
   display: flex;
   align-items: center;
   gap: 20px;
   list-style: none;
-  overflow-x: auto;
+  margin: 0;
+  padding: 0;
 }
 
-.lower-header ul::-webkit-scrollbar {
-  display: none;
-}
-.lower-header ul {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.lower-header li {
+/*  Menu Items */
+.menu-item,
+.all-menu {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   cursor: pointer;
-  padding: 6px 4px;
-  white-space: nowrap;
-  font-size: 14px;
-  transition: background 0.2s;
-}
-
-.lower-header li:hover {
-  background-color: #37475a;
+  padding: 6px 10px;
   border-radius: 4px;
+  white-space: nowrap;
+  transition: background 0.2s ease;
 }
 
-.lower-header li svg {
-  font-size: 20px;
+.menu-item:hover,
+.all-menu:hover {
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Mobile & Tablet adjustments */
+.all-menu svg {
+  font-size: 18px;
+}
+
+.all-menu p {
+  margin: 0;
+}
+
+
+   /*  Responsive */
+
+
+/*  Mobile (<768px) */
 @media (max-width: 768px) {
-  .lower-header ul {
+  .menu-list {
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
   }
 
-  /* Collapse items except the first one */
-  .lower-header li:not(:first-child) {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: all 0.3s ease;
-    padding: 3px 6px; /* Smaller padding */
-    margin-left: 0;
+  /* Keep "All" always visible */
+  .all-menu {
+    width: 100%;
+    justify-content: flex-start;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  /* When menu is open */
-  .lower-header ul.open li:not(:first-child) {
-    max-height: 50px; /* Reduced height */
-    opacity: 1;
-    padding: 5px 10px; /* Slight padding for readability */
+  /* Hide other menu items by default */
+  .menu-item {
+    display: none;
+    width: 100%;
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   }
 
-  .lower-header li svg {
-    font-size: 18px;
+  /* Show them when menu is open */
+  .menu-list.open .menu-item {
+    display: flex;
+  }
+
+  .menu-item:last-child {
+    border-bottom: none;
   }
 }
 
-@media (max-width: 480px) {
-  .lower-header ul.open li:not(:first-child) {
-    max-height: 45px; /* Slightly lower on small screens */
-    padding: 4px 8px;
+/*  Desktop (≥769px) */
+@media (min-width: 769px) {
+  .menu-list {
+    flex-direction: row;
   }
-  .lower-header li svg {
-    font-size: 16px;
+
+  .menu-item {
+    display: flex; /* Always visible on desktop */
+    border: none;
   }
 }

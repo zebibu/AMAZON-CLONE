@@ -1,21 +1,20 @@
-/* ===============================
-   🔹 Products Container
-================================= */
+ /* Products Container */
+
 .products_container {
   display: flex;
-  flex-wrap: wrap;          /* ✅ always wrap */
+  flex-wrap: wrap;          
   gap: 20px;
   padding: 20px;
-  justify-content: center;  /* center nicely */
+  justify-content: center;  
   background-color: #f9f9f9;
   box-sizing: border-box;
 }
 
-/* ✅ Product Card */
+/* Product Card */
 .product-card {
-  flex: 1 1 220px;          /* base width 220px, grows/shrinks */
-  max-width: 300px;         /* prevents too wide on big screens */
-  min-width: 180px;         /* prevents squishing */
+  flex: 1 1 220px;          
+  max-width: 300px;          
+  min-width: 180px;         
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   background: #fff;
@@ -33,7 +32,7 @@
   transform: translateY(-4px);
 }
 
-/* ✅ Image */
+/* Image */
 .product-card img {
   width: 100%;
   height: 220px;
@@ -46,7 +45,7 @@
   transform: scale(1.05);
 }
 
-/* ✅ Title */
+/*  Title */
 .product-card h2 {
   font-size: 15px;
   font-weight: 500;
@@ -63,7 +62,7 @@
   text-decoration: underline;
 }
 
-/* ✅ Price */
+/*  Price */
 .product-card .price {
   font-size: 18px;
   font-weight: bold;
@@ -71,7 +70,7 @@
   margin-top: 8px;
 }
 
-/* ✅ Button */
+/*  Button */
 .product-card button {
   background: #ffd814;
   border: 1px solid #fcd200;
@@ -94,14 +93,14 @@
   transform: scale(0.98);
 }
 
-/* ===============================
-   🔹 Responsive Tweaks
-================================= */
+
+   /*  Responsive Tweaks */
+
 
 /* Phones */
 @media (max-width: 575px) {
   .product-card {
-    flex: 1 1 100%;   /* full width on very small */
+    flex: 1 1 100%;   
     max-width: 100%;
   }
 
@@ -113,7 +112,7 @@
 /* Tablets */
 @media (min-width: 576px) and (max-width: 992px) {
   .product-card {
-    flex: 1 1 45%;   /* ~2 per row */
+    flex: 1 1 45%;   
     max-width: 48%;
   }
 
@@ -125,7 +124,7 @@
 /* Desktops */
 @media (min-width: 993px) {
   .product-card {
-    flex: 1 1 22%;   /* ~4 per row */
+    flex: 1 1 22%;   
     max-width: 24%;
   }
 }

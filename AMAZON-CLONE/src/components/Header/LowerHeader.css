@@ -90,7 +90,7 @@
   }
 
   .menu-item {
-    display: flex; /* Always visible on desktop */
+    display: flex;
     border: none;
   }
 }

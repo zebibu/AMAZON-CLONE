@@ -1,4 +1,3 @@
-/* ================= Grid Layout for Products ================= */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -13,7 +12,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: row; /* like cart product-card */
+  flex-direction: row; 
   gap: 20px;
   padding: 15px;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -27,7 +26,7 @@
 
 /* Product image */
 .product-card__image {
-  width: 150px; /* same as cart */
+  width: 150px; 
   height: 150px;
   object-fit: contain;
   border-radius: 4px;

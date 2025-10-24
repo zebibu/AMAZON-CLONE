@@ -1,13 +1,13 @@
-import React from 'react'
-import Header from '../Header/Header'
+import React from "react";
+import Header from "../Header/header";
 
-function LayOut({children}) {
+function LayOut({ children }) {
   return (
     <div>
       <Header />
-        {children}
+      {children}
     </div>
-  )
+  );
 }
 
-export default LayOut
+export default LayOut;

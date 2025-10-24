@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import "./Auth.css";
+import "./auth.css";
 import { auth } from "../../Utility/firebase";
 import {
   signInWithEmailAndPassword,
@@ -79,8 +79,7 @@ function Auth() {
       <div className="auth-container">
         <h1 className="auth-title">Sign-In</h1>
         {navStateData.state?.msg && (
-          <small style={{ color: "red",
-           }}>{navStateData.state.msg}</small>
+          <small style={{ color: "red" }}>{navStateData.state.msg}</small>
         )}
         <form className="auth-form">
           <div className="auth-input-group">
